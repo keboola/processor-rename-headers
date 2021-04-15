@@ -109,7 +109,7 @@ class Component(KBCEnvHandler):
             shutil.copy(t.path + '.manifest', new_path)
 
     def get_header(self, t: TableDef):
-        if t.is_sliced:
+        if t.is_sliced or t.manifest.get('columns'):
             header = t.manifest['columns']
         else:
             with open(t.path) as input:
