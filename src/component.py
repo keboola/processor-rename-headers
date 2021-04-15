@@ -81,8 +81,8 @@ class Component(KBCEnvHandler):
             table_defs.append(TableDef(path=t, file_name=p.name, is_sliced=is_sliced, manifest=manifest))
         return table_defs
 
-    def rename_headers(self, t, index_separator='_'):
-        if not self.cfg_params.get(t.file_name):
+    def rename_headers(self, t):
+        if t.file_name not in self.cfg_params:
             # just move the files
             self._copy_table_to_out(t)
             self._copy_manifest_to_out(t)
