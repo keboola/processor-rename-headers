@@ -1,6 +1,6 @@
-# Header deduplication processor
+# Rename headers processor
 
-Takes all tables in `out/tables/` and deduplicates any duplicated columns by adding an index. All other tables 
+Takes all tables in `out/tables/` and renames specified columns in specified tables. All other tables 
 that do not contain duplicated headers are moved to out unmodified.
 
 
@@ -8,47 +8,33 @@ that do not contain duplicated headers are moved to out unmodified.
   
 [TOC]
 
-## Functional notes
-
-Any table with header containing duplicate columns has its column names deduplicated by appending index:
-
-`A, B, B, C, D` => `A, B, B_1, C, D`
-
-- works with sliced tables
-- works with normal tables
-- does not ignore manifest file
-- if order of duplicated columns changes in the source, the values may be swapped 
 
 
 ## Configuration
 
-### Index separator
+list table names in parameters and list columns to rename, all others are kept
 
-Optional parameter `index_separator`.
-
-It is possible to define custom index separator. This is useful when deduplication would lead to already existing column name. 
-By default, `_` separator is used. 
-
-e.g.
-`A, B, B, B_1, C` => would with the default separator lead to `A, B, B_1, B_1, C`
-
-Fix this by specifying custom separator `__`:
-
-`A, B, B, B_1, C` => would with the default separator lead to `A, B, B__1, B_1, C`
-
-
-**NOTE**: Only Storage column supported characters may be used, otherwise the import to storage fails. 
+```
+"test.csv": {
+          "column_mapping": {
+            "Column_1": "New_name_col_1"
+          }
+```
 
 ### Sample configuration
 
 ```json
 {
     "definition": {
-        "component": "kds-team.processor-deduplicate-headers"
+        "component": "kds-team.processor-rename-headers"
     },
     "parameters": {
-    	    "index_separator": "_"
-	}
+        "test.csv": {
+          "column_mapping": {
+            "Column_1": "New_name_col_1"
+          }
+    }
+}
 }
 ```
  
@@ -67,7 +53,7 @@ If required, change local data folder (the `CUSTOM_FOLDER` placeholder) path to 
 Clone this repository, init the workspace and run the component with following command:
 
 ```
-git clone https://bitbucket.org:kds_consulting_team/kds-team.processor-deduplicate-headers.git my-new-component
+git clone https://bitbucket.org:kds_consulting_team/kds-team.processor-rename-headers.git my-new-component
 cd my-new-component
 docker-compose build
 docker-compose run --rm dev
