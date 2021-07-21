@@ -1,7 +1,9 @@
 # Rename headers processor
 
-Takes all tables in `out/tables/` and renames specified columns in specified tables. All other tables 
-that do not contain duplicated headers are moved to out unmodified.
+Takes all tables in `in/tables/` and renames specified columns in specified tables. Result is moved to `out/tables/` All other tables 
+that are not specified or columns that are not specified are moved unchanged.
+
+Manifest files are respected and transferred / modified as well.
 
 
 **Table of contents:**  
