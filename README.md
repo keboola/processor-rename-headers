@@ -16,12 +16,25 @@ Manifest files are respected and transferred / modified as well.
 
 list table names in parameters and list columns to rename, all others are kept
 
+
 ```
 "test.csv": {
           "column_mapping": {
             "Column_1": "New_name_col_1"
           }
 ```
+
+
+**NOTE**: Simple `*` wildcard is supported at the end of table name, e.g.:
+
+```
+"te*": {
+          "column_mapping": {
+            "Column_1": "New_name_col_1"
+          }
+```
+
+The above will rename columns in table `test.csv`. 
 
 ### Sample configuration
 

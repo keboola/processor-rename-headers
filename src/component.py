@@ -82,12 +82,21 @@ class Component(KBCEnvHandler):
         return table_defs
 
     def rename_headers(self, t):
-        if t.file_name not in self.cfg_params:
+        patterns = [k for k in list(self.cfg_params.keys()) if k.endswith('*')]
+        matched_key = None
+        for p in patterns:
+            pat = p.replace("*", '')
+            if t.file_name.startswith(pat):
+                matched_key = p
+        if t.file_name in self.cfg_params:
+            matched_key = t.file_name
+
+        if not matched_key:
             # just move the files
             self._copy_table_to_out(t)
             self._copy_manifest_to_out(t)
             return
-        mapping = self.cfg_params[t.file_name].get(KEY_COLUMN_MAPPING, {})
+        mapping = self.cfg_params[matched_key].get(KEY_COLUMN_MAPPING, {})
         header = self.get_header(t)
         new_header = list()
         for c in header:
