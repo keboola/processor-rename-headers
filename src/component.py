@@ -121,7 +121,7 @@ class Component(KBCEnvHandler):
         if t.is_sliced or t.manifest.get('columns'):
             header = t.manifest['columns']
         else:
-            with open(t.path) as input:
+            with open(t.path, encoding='utf-8') as input:
                 delimiter = t.manifest.get('delimiter', ',')
                 enclosure = t.manifest.get('enclosure', '"')
                 reader = DictReader(input, lineterminator='\n', delimiter=delimiter, quotechar=enclosure)
@@ -131,7 +131,7 @@ class Component(KBCEnvHandler):
 
     def replace_header_in_file_and_move(self, f, new_header, separator=','):
         new_path = os.path.join(self.tables_out_path, Path(f).name)
-        with open(f) as from_file, open(new_path, mode="w") as to_file:
+        with open(f, encoding='utf-8') as from_file, open(new_path, mode="w", encoding='utf-8') as to_file:
             line = from_file.readline()
 
             line = separator.join(new_header)
