@@ -19,9 +19,9 @@
     }
   },
   "parameters": {
-    "test.csv": {
+    "sliced*": {
       "column_mapping": {
-        "Column_1": "New_name_col_1"
+        "session_name": "SESSION_NAME"
       }
     }
   },

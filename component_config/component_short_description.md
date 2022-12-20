@@ -1,1 +1,1 @@
-Convert XLSX named ranges into CSV.
+Rename columns in specified tables.

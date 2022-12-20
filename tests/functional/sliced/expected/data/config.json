@@ -19,9 +19,9 @@
     }
   },
   "parameters": {
-    "test.csv": {
+    "1DAHtWJp2qLnOQT4WPfgBFbHe2d2jLL3K5wflX3KMklA*": {
       "column_mapping": {
-        "Column_1": "New_name_col_1"
+        "Role_podle_role_vam_budou_prirazeny_spravne_workshopy_httpsacademykeboolacompagescsasacademy": "Role"
       }
     }
   },

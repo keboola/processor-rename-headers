@@ -1,21 +1,19 @@
 # Rename headers processor
 
-Takes all tables in `in/tables/` and renames specified columns in specified tables. Result is moved to `out/tables/` All other tables 
-that are not specified or columns that are not specified are moved unchanged.
+Takes all tables in `in/tables/` and renames specified columns in specified tables. Result is moved to `out/tables/` All
+other tables that are not specified or columns that are not specified are moved unchanged.
+
+Files folder `in/files` is moved unchanged.
 
 Manifest files are respected and transferred / modified as well.
 
+**Table of contents:**
 
-**Table of contents:**  
-  
 [TOC]
-
-
 
 ## Configuration
 
 list table names in parameters and list columns to rename, all others are kept
-
 
 ```
 "test.csv": {
@@ -23,7 +21,6 @@ list table names in parameters and list columns to rename, all others are kept
             "Column_1": "New_name_col_1"
           }
 ```
-
 
 **NOTE**: Simple `*` wildcard is supported at the end of table name, e.g.:
 
@@ -34,31 +31,32 @@ list table names in parameters and list columns to rename, all others are kept
           }
 ```
 
-The above will rename columns in table `test.csv`. 
+The above will rename columns in table `test.csv`.
 
 ### Sample configuration
 
 ```json
 {
-    "definition": {
-        "component": "kds-team.processor-rename-headers"
-    },
-    "parameters": {
-        "test.csv": {
-          "column_mapping": {
-            "Column_1": "New_name_col_1"
-          }
+  "definition": {
+    "component": "kds-team.processor-drop-headers"
+  },
+  "parameters": {
+    "test.csv": {
+      "column_mapping": {
+        "Column_1": "New_name_col_1"
+      }
     }
-}
+  }
 }
 ```
- 
+
 # Development
- 
-This example contains runnable container with simple unittest. For local testing it is useful to include `data` folder in the root
-and use docker-compose commands to run the container or execute tests. 
+
+This example contains runnable container with simple unittest. For local testing it is useful to include `data` folder
+in the root and use docker-compose commands to run the container or execute tests.
 
 If required, change local data folder (the `CUSTOM_FOLDER` placeholder) path to your custom path:
+
 ```yaml
     volumes:
       - ./:/code
@@ -82,9 +80,10 @@ docker-compose run --rm test
 
 # Testing
 
-The preset pipeline scripts contain sections allowing pushing testing image into the ECR repository and automatic 
-testing in a dedicated project. These sections are by default commented out. 
+The preset pipeline scripts contain sections allowing pushing testing image into the ECR repository and automatic
+testing in a dedicated project. These sections are by default commented out.
 
 # Integration
 
-For information about deployment and integration with KBC, please refer to the [deployment section of developers documentation](https://developers.keboola.com/extend/component/deployment/) 
+For information about deployment and integration with KBC, please refer to
+the [deployment section of developers documentation](https://developers.keboola.com/extend/component/deployment/) 
