@@ -66,6 +66,9 @@ class Component(ComponentBase):
         if t.is_sliced:
             self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
             shutil.copytree(t.full_path, Path(self.tables_out_path).joinpath(t.name), dirs_exist_ok=True)
+        elif t.columns:
+            self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
+            shutil.copy(t.full_path, Path(self.tables_out_path).joinpath(t.name))
         else:
             self.replace_header_in_file_and_move(t.full_path, new_header, t.delimiter)
             self._copy_manifest_to_out(t)
