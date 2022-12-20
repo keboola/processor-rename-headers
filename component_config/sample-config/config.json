@@ -19,10 +19,11 @@
     }
   },
   "parameters": {
-    "range_names": [
-      "Results"
-    ],
-    "continue_on_failure": 1
+    "test.csv": {
+      "column_mapping": {
+        "Column_1": "New_name_col_1"
+      }
+    }
   },
   "image_parameters": {
     "syrup_url": "https://syrup.keboola.com/"

@@ -38,7 +38,7 @@ The above will rename columns in table `test.csv`.
 ```json
 {
   "definition": {
-    "component": "kds-team.processor-rename-headers"
+    "component": "kds-team.processor-drop-headers"
   },
   "parameters": {
     "test.csv": {
