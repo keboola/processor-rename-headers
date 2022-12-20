@@ -17,7 +17,7 @@ Manifest files are respected and transferred / modified as well.
 ```json
 {
   "definition": {
-    "component": "kds-team.processor-drop-headers"
+    "component": "kds-team.processor-rename-headers"
   },
   "parameters": {
     "test.csv": {
