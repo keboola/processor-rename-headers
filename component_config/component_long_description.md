@@ -6,9 +6,6 @@ Files present in folder `in/files` are moved unchanged.
 
 Manifest files are respected and transferred / modified as well.
 
-**Table of contents:**
-
-[TOC]
 
 ## Configuration
 
