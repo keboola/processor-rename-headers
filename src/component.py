@@ -63,6 +63,9 @@ class Component(ComponentBase):
                 new_header.append(mapping[c])
             else:
                 new_header.append(c)
+
+        self.rename_metadata(t, mapping)
+
         if t.is_sliced:
             self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
             shutil.copytree(t.full_path, Path(self.tables_out_path).joinpath(t.name), dirs_exist_ok=True)
@@ -72,6 +75,17 @@ class Component(ComponentBase):
         else:
             self.replace_header_in_file_and_move(t.full_path, new_header, t.delimiter)
             self._copy_manifest_to_out(t)
+
+    def rename_metadata(self, table: TableDefinition, mapping: dict):
+        new_metadata = {}
+        if table._raw_manifest.get('column_metadata'):
+            for key, value in table._raw_manifest.get('column_metadata').items():
+                if key in mapping:
+                    new_key = mapping[key]
+                else:
+                    new_key = key
+                new_metadata[new_key] = value
+            table._raw_manifest['column_metadata'] = new_metadata
 
     def _copy_manifest_to_out(self, t: TableDefinition):
         if t.get_manifest_dictionary():
