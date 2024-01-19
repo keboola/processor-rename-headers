@@ -66,13 +66,16 @@ class Component(ComponentBase):
 
         self.rename_metadata(t, mapping)
 
+        is_input_mapping_manifest = 'uri' in t._raw_manifest
         if t.is_sliced:
             self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
             shutil.copytree(t.full_path, Path(self.tables_out_path).joinpath(t.name), dirs_exist_ok=True)
-        elif t.columns:
+        elif t.columns and not is_input_mapping_manifest:
             self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
             shutil.copy(t.full_path, Path(self.tables_out_path).joinpath(t.name))
         else:
+            if is_input_mapping_manifest:
+                t.columns = new_header
             self.replace_header_in_file_and_move(t.full_path, new_header, t.delimiter)
             self._copy_manifest_to_out(t)
 
@@ -88,9 +91,9 @@ class Component(ComponentBase):
             table._raw_manifest['column_metadata'] = new_metadata
 
     def _copy_manifest_to_out(self, t: TableDefinition):
-        if t.get_manifest_dictionary():
+        if raw_manifest := t._raw_manifest:
             new_path = os.path.join(self.tables_out_path, Path(t.full_path).name + '.manifest')
-            shutil.copy(t.full_path + '.manifest', new_path)
+            json.dump(raw_manifest, open(new_path, 'w+'))
 
     def get_header(self, t: TableDefinition):
         if t.is_sliced or t.columns:
