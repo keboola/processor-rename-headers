@@ -1,0 +1,11 @@
+{
+  "destination": "in.c-testing-data-932966184.testing_data_contact",
+  "metadata": [],
+  "column_metadata": {},
+  "columns": [
+    "name",
+    "email",
+    "address",
+    "company"
+  ]
+}
