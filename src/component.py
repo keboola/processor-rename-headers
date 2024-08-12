@@ -1,10 +1,10 @@
-import json
 import logging
 import os
 import shutil
 from csv import DictReader
 from dataclasses import dataclass, field
 from pathlib import Path
+import copy
 
 from keboola.component import ComponentBase, UserException
 # configuration variables
@@ -53,7 +53,8 @@ class Component(ComponentBase):
         if not matched_key:
             # just move the files
             self._copy_table_to_out(t)
-            self._copy_manifest_to_out(t)
+            t.full_path = t.full_path.replace(self.tables_in_path, self.tables_out_path)
+            self.write_manifest(t)
             return
         mapping = self.configuration.parameters[matched_key].get(KEY_COLUMN_MAPPING, {})
         header = self.get_header(t)
@@ -66,38 +67,42 @@ class Component(ComponentBase):
 
         self.rename_metadata(t, mapping)
 
-        is_input_mapping_manifest = 'uri' in t._raw_manifest
+        is_input_mapping_manifest = t.stage == 'in'
         if t.is_sliced:
-            self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
             shutil.copytree(t.full_path, Path(self.tables_out_path).joinpath(t.name), dirs_exist_ok=True)
-        elif t.columns and not is_input_mapping_manifest:
-            self.replace_header_in_manifest_and_move(t.full_path, t._raw_manifest, new_header)  # noqa
+        elif t.column_names and not is_input_mapping_manifest:
             shutil.copy(t.full_path, Path(self.tables_out_path).joinpath(t.name))
         else:
-            if is_input_mapping_manifest:
-                t.columns = new_header
             self.replace_header_in_file_and_move(t.full_path, new_header, t.delimiter)
-            self._copy_manifest_to_out(t)
+
+        self.rename_columns_in_table_definition(t, new_header)
+        t.full_path = t.full_path.replace(self.tables_in_path, self.tables_out_path)
+        self.write_manifest(t)
+
+    def rename_columns_in_table_definition(self, table: TableDefinition, new_column_names: list):
+        new_table_definition = copy.deepcopy(table)
+        old_column_names = list(table.schema.keys())
+        new_table_definition.delete_columns(old_column_names)
+
+        for old_name, new_name in zip(old_column_names, new_column_names):
+            new_table_definition.add_column(new_name, table.schema[old_name])
+
+        table.schema = new_table_definition.schema
 
     def rename_metadata(self, table: TableDefinition, mapping: dict):
         new_metadata = {}
-        if table._raw_manifest.get('column_metadata'):
-            for key, value in table._raw_manifest.get('column_metadata').items():
+        if table.table_metadata.column_metadata:
+            for key, value in table.table_metadata.column_metadata.items():
                 if key in mapping:
                     new_key = mapping[key]
                 else:
                     new_key = key
                 new_metadata[new_key] = value
-            table._raw_manifest['column_metadata'] = new_metadata
-
-    def _copy_manifest_to_out(self, t: TableDefinition):
-        if raw_manifest := t._raw_manifest:
-            new_path = os.path.join(self.tables_out_path, Path(t.full_path).name + '.manifest')
-            json.dump(raw_manifest, open(new_path, 'w+'))
+            table.table_metadata.column_metadata = new_metadata
 
     def get_header(self, t: TableDefinition):
-        if t.is_sliced or t.columns:
-            header = t.columns
+        if t.is_sliced or t.column_names:
+            header = t.column_names
         else:
             with open(t.full_path, encoding='utf-8') as input:
                 delimiter = t.delimiter
@@ -116,11 +121,6 @@ class Component(ComponentBase):
             to_file.write(line + '\n')
             # the pointer in original file is 1 now
             shutil.copyfileobj(from_file, to_file)
-
-    def replace_header_in_manifest_and_move(self, file_path, manifest, new_header):
-        manifest['columns'] = new_header
-        with open(os.path.join(self.tables_out_path, Path(file_path).name + '.manifest'), 'w+') as out_f:
-            json.dump(manifest, out_f)
 
     def _copy_table_to_out(self, t: TableDefinition):
         if Path(t.full_path).is_dir():

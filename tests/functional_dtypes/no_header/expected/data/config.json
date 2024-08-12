@@ -1,0 +1,14 @@
+{
+    "parameters": {
+        "test*": {
+            "column_mapping": {
+                "address": "address_renamed"
+            }
+        }
+    },
+    "image_parameters": {},
+    "action": "run",
+    "shared_code_row_ids": [],
+    "storage": {},
+    "authorization": {}
+}
