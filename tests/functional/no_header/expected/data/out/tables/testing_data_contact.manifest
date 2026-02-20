@@ -1,6 +1,6 @@
 {
   "destination": "in.c-testing-data-932966184.testing_data_contact",
-  "write_always": false,
+  "incremental": false,
   "delimiter": ",",
   "enclosure": "\"",
   "columns": [

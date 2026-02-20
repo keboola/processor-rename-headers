@@ -1,7 +1,6 @@
 {
   "destination": "in.c-keboola-ex-google-drive-744153.ss-academy-project-control-sheet-session-track-mapping",
   "incremental": true,
-  "write_always": false,
   "delimiter": ",",
   "enclosure": "\"",
   "column_metadata": {
