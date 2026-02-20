@@ -1,1 +1,9 @@
-{"destination": "in.c-keboola-ex-google-drive-744153.ss-academy-project-control-sheet-session-track-mapping", "incremental": false, "write_always": false, "delimiter": ",", "enclosure": "\"", "manifest_type": "out", "has_header": true}
+{
+  "destination": "in.c-keboola-ex-google-drive-744153.ss-academy-project-control-sheet-session-track-mapping",
+  "incremental": false,
+  "write_always": false,
+  "delimiter": ",",
+  "enclosure": "\"",
+  "manifest_type": "out",
+  "has_header": true
+}
