@@ -1,0 +1,31 @@
+[project]
+name = "kds-team.processor-rename-headers"
+version = "0.0.0"
+
+dependencies = [
+    "keboola.component>=1.6.6",
+]
+
+requires-python = ">=3.12"
+
+authors = [
+    { name = "Keboola KDS Team", email = "support@keboola.com" }
+]
+
+description = "Keboola processor for renaming table headers"
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE.md"]
+
+[dependency-groups]
+dev = [
+    "flake8>=5.0.4",
+    "pytest>=8.3.5",
+    "ruff>=0.13.2",
+    "mock",
+    "freezegun",
+    "datadirtest",
+]
+
+[tool.uv.sources]
+datadirtest = { git = "https://github.com/keboola/datadirtest" }
