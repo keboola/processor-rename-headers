@@ -1,1 +1,47 @@
-{"destination": "in.c-testing-data-932966184.testing_data_contact", "write_always": false, "delimiter": ",", "enclosure": "\"", "manifest_type": "out", "has_header": false, "schema": [{"name": "name", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "email", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "address_renamed", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "company", "data_type": {"base": {"type": "STRING"}}, "nullable": true}]}
+{
+  "destination": "in.c-testing-data-932966184.testing_data_contact",
+  "incremental": false,
+  "write_always": false,
+  "delimiter": ",",
+  "enclosure": "\"",
+  "manifest_type": "out",
+  "has_header": false,
+  "schema": [
+    {
+      "name": "name",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "email",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "address_renamed",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "company",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    }
+  ]
+}

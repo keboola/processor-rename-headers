@@ -1,1 +1,79 @@
-{"destination": "in.c-keboola-ex-google-drive-744153.ss-academy-project-control-sheet-session-track-mapping", "incremental": true, "write_always": false, "delimiter": ",", "enclosure": "\"", "column_metadata": {"track": [{"key": "KBC.datatype.type", "value": "int"}, {"key": "KBC.datatype.nullable", "value": false}, {"key": "KBC.datatype.basetype", "value": "INTEGER"}, {"key": "KBC.datatype.length", "value": "10"}, {"key": "KBC.sourceName", "value": "ID"}, {"key": "KBC.sanitizedName", "value": "ID"}, {"key": "KBC.primaryKey", "value": true}, {"key": "KBC.uniqueKey", "value": false}, {"key": "KBC.ordinalPosition", "value": 1}], "session_id": [{"key": "KBC.datatype.type", "value": "int"}, {"key": "KBC.datatype.nullable", "value": false}, {"key": "KBC.datatype.basetype", "value": "INTEGER"}], "SESSION_NAME": [{"key": "KBC.datatype.type", "value": "int"}, {"key": "KBC.datatype.nullable", "value": false}, {"key": "KBC.datatype.basetype", "value": "INTEGER"}]}, "columns": ["track", "session_id", "SESSION_NAME"]}
+{
+  "destination": "in.c-keboola-ex-google-drive-744153.ss-academy-project-control-sheet-session-track-mapping",
+  "incremental": true,
+  "delimiter": ",",
+  "enclosure": "\"",
+  "column_metadata": {
+    "track": [
+      {
+        "key": "KBC.datatype.type",
+        "value": "int"
+      },
+      {
+        "key": "KBC.datatype.nullable",
+        "value": false
+      },
+      {
+        "key": "KBC.datatype.basetype",
+        "value": "INTEGER"
+      },
+      {
+        "key": "KBC.datatype.length",
+        "value": "10"
+      },
+      {
+        "key": "KBC.sourceName",
+        "value": "ID"
+      },
+      {
+        "key": "KBC.sanitizedName",
+        "value": "ID"
+      },
+      {
+        "key": "KBC.primaryKey",
+        "value": true
+      },
+      {
+        "key": "KBC.uniqueKey",
+        "value": false
+      },
+      {
+        "key": "KBC.ordinalPosition",
+        "value": 1
+      }
+    ],
+    "session_id": [
+      {
+        "key": "KBC.datatype.type",
+        "value": "int"
+      },
+      {
+        "key": "KBC.datatype.nullable",
+        "value": false
+      },
+      {
+        "key": "KBC.datatype.basetype",
+        "value": "INTEGER"
+      }
+    ],
+    "SESSION_NAME": [
+      {
+        "key": "KBC.datatype.type",
+        "value": "int"
+      },
+      {
+        "key": "KBC.datatype.nullable",
+        "value": false
+      },
+      {
+        "key": "KBC.datatype.basetype",
+        "value": "INTEGER"
+      }
+    ]
+  },
+  "columns": [
+    "track",
+    "session_id",
+    "SESSION_NAME"
+  ]
+}

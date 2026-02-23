@@ -7,14 +7,15 @@ from pathlib import Path
 import copy
 
 from keboola.component import ComponentBase, UserException
+
 # configuration variables
 from keboola.component.dao import TableDefinition
 
 # global constants'
 
-KEY_COLUMN_MAPPING = 'column_mapping'
+KEY_COLUMN_MAPPING = "column_mapping"
 # #### Keep for debug
-KEY_DEBUG = 'debug'
+KEY_DEBUG = "debug"
 MANDATORY_PARS = []
 
 
@@ -27,7 +28,6 @@ class TableDef:
 
 
 class Component(ComponentBase):
-
     def __init__(self):
         ComponentBase.__init__(self)
         self.validate_configuration_parameters(MANDATORY_PARS)
@@ -41,10 +41,10 @@ class Component(ComponentBase):
             shutil.copytree(self.files_in_path, self.files_out_path, dirs_exist_ok=True)
 
     def rename_headers(self, t: TableDefinition):
-        patterns = [k for k in list(self.configuration.parameters.keys()) if k.endswith('*')]
+        patterns = [k for k in list(self.configuration.parameters.keys()) if k.endswith("*")]
         matched_key = None
         for p in patterns:
-            pat = p.replace("*", '')
+            pat = p.replace("*", "")
             if t.name.startswith(pat):
                 matched_key = p
         if t.name in self.configuration.parameters:
@@ -67,7 +67,7 @@ class Component(ComponentBase):
 
         self.rename_metadata(t, mapping)
 
-        is_input_mapping_manifest = t.stage == 'in'
+        is_input_mapping_manifest = t.stage == "in"
         if t.is_sliced:
             shutil.copytree(t.full_path, Path(self.tables_out_path).joinpath(t.name), dirs_exist_ok=True)
         elif t.column_names and not is_input_mapping_manifest:
@@ -104,21 +104,21 @@ class Component(ComponentBase):
         if t.is_sliced or t.column_names:
             header = t.column_names
         else:
-            with open(t.full_path, encoding='utf-8') as input:
+            with open(t.full_path, encoding="utf-8") as input:
                 delimiter = t.delimiter
                 enclosure = t.enclosure
-                reader = DictReader(input, lineterminator='\n', delimiter=delimiter, quotechar=enclosure)
+                reader = DictReader(input, lineterminator="\n", delimiter=delimiter, quotechar=enclosure)
                 header = reader.fieldnames
 
         return header
 
-    def replace_header_in_file_and_move(self, f, new_header, separator=','):
+    def replace_header_in_file_and_move(self, f, new_header, separator=","):
         new_path = os.path.join(self.tables_out_path, Path(f).name)
-        with open(f, encoding='utf-8') as from_file, open(new_path, mode="w", encoding='utf-8') as to_file:
+        with open(f, encoding="utf-8") as from_file, open(new_path, mode="w", encoding="utf-8") as to_file:
             line = from_file.readline()
 
             line = separator.join(new_header)
-            to_file.write(line + '\n')
+            to_file.write(line + "\n")
             # the pointer in original file is 1 now
             shutil.copyfileobj(from_file, to_file)
 

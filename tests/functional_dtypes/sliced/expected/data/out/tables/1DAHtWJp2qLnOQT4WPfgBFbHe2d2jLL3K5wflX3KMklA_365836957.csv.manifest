@@ -1,1 +1,56 @@
-{"destination": "in.c-keboola-ex-google-drive-744153.ss-academy-workbook-registration-form", "incremental": false, "write_always": false, "delimiter": ",", "enclosure": "\"", "manifest_type": "out", "has_header": false, "schema": [{"name": "Timestamp", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "Email_Address", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "Vase_cele_jmeno", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "Nazev_vaseho_Tribu__oddeleni", "data_type": {"base": {"type": "STRING"}}, "nullable": true}, {"name": "Role", "data_type": {"base": {"type": "STRING"}}, "nullable": true}]}
+{
+  "destination": "in.c-keboola-ex-google-drive-744153.ss-academy-workbook-registration-form",
+  "incremental": false,
+  "write_always": false,
+  "delimiter": ",",
+  "enclosure": "\"",
+  "manifest_type": "out",
+  "has_header": false,
+  "schema": [
+    {
+      "name": "Timestamp",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "Email_Address",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "Vase_cele_jmeno",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "Nazev_vaseho_Tribu__oddeleni",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    },
+    {
+      "name": "Role",
+      "data_type": {
+        "base": {
+          "type": "STRING"
+        }
+      },
+      "nullable": true
+    }
+  ]
+}
